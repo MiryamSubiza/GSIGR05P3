@@ -167,6 +167,9 @@ public class Sales implements XMLRepresentable {
         xStream.alias("client", Client.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("artist", Artist.class);
+        xStream.alias("concert", Concert.class);
+        xStream.alias("festival", Festival.class);
+        xStream.alias("exhibition", Exhibition.class);
         String xml = xStream.toXML(this);        
         return xml;
     }
