@@ -162,7 +162,7 @@ public class Sales implements XMLRepresentable {
         // datos en XML
         XStream xStream = new XStream(new DomDriver());
         // Cambio el alias de la clase en XML
-        xStream.alias("sale", Sales.class);
+        xStream.alias("sales", Sales.class);
         xStream.alias("ticket", Ticket.class);
         xStream.alias("client", Client.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
