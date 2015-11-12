@@ -8,6 +8,10 @@
 
 package GSILabs.BModel;
 
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -20,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Ticket {
+public class Ticket implements XMLRepresentable {
     
     private Event event;
     //Clave: Identificador para una persona
@@ -207,6 +211,34 @@ public class Ticket {
         return "TICKET\nName of the event: " + event.getName() + 
                 "\nNumber of people: " + numberOfPeople + "\nAvailability: "
                 + availability + "\nIdentifiers: " + people.toString() + "\n";
+    }
+
+    @Override
+    public String toXML() {
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("ticket", Ticket.class);
+        xStream.alias("concert", Concert.class);
+        xStream.alias("exhibition", Exhibition.class);
+        xStream.alias("festival", Festival.class);
+        xStream.alias("location", Location.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        xStream.alias("artists", Artist.class);
+        xStream.alias("collective", Collective.class);
+        String xml = xStream.toXML(this);        
+        return xml;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

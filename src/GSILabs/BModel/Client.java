@@ -8,6 +8,10 @@
 
 package GSILabs.BModel;
 
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,7 +22,7 @@ import java.util.Iterator;
  * @author izu.78236
  * @version 1.0 (18/09/2015)
  */
-public class Client {
+public class Client implements XMLRepresentable{
     
     private int id;
     private String dni;
@@ -200,6 +204,28 @@ public class Client {
         return "CLIENT\nID: " + id + "\nDNI: " + dni + "\nName: " + name + "\nLast name: " +
                 lastName + "\nBirthday: " + birthday.fechaToString() + "\nCredit cards: "
                 + cards + "\n";
+    }
+
+    @Override
+    public String toXML() {
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("client", Client.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        String xml = xStream.toXML(this);        
+        return xml;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

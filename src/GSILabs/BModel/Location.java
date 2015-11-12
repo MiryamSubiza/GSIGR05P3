@@ -7,6 +7,17 @@
  */
 
 package GSILabs.BModel;
+import java.io.FileWriter;
+import java.io.IOException;
+import org.jdom.Attribute;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+import GSILabs.Serializable.*;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
 
 /**
  * Información sobre localizaciones que son únicas
@@ -14,7 +25,7 @@ package GSILabs.BModel;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Location {
+public class Location implements XMLRepresentable{
     
     private String name;
     private int maxCapacity;
@@ -143,5 +154,29 @@ public class Location {
                 maxCapacity + "\nGeographic position: " + geographicPosition + 
                 "\nWebsite: " + webSite + "\n";
     }
+
+    @Override
+    public String toXML() {
+        
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("location", Location.class);
+        return xStream.toXML(this);
+        
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
 }

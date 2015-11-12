@@ -8,6 +8,10 @@
 
 package GSILabs.BModel;
 
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -16,7 +20,7 @@ import java.util.Date;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Concert implements ImpermanentEvent {
+public class Concert implements ImpermanentEvent, XMLRepresentable {
     
     private String concertName;
     private Performer p;
@@ -276,6 +280,31 @@ public class Concert implements ImpermanentEvent {
                 "h\nStart time: " + startTimeConcert.horaToString() + 
                 "h\nClosing time: " + closingTimeConcert.horaToString() + 
                 "h\nLocation: " + location.getName() + "\n";
+    }
+
+    @Override
+    public String toXML() {
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("concert", Concert.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        xStream.alias("artist", Artist.class);
+        xStream.alias("collective", Collective.class);
+        xStream.alias("location", Location.class);        
+        String xml = xStream.toXML(this);        
+        return xml;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
