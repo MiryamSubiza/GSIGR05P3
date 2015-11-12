@@ -170,6 +170,7 @@ public class Location implements XMLRepresentable{
 
     @Override
     public boolean saveToXML(File f) {
+        
         boolean respuesta = false;
         XStream xStream = new XStream(new DomDriver());
         FileWriter fichero = null;
@@ -198,6 +199,7 @@ public class Location implements XMLRepresentable{
            }
         }
         return respuesta;
+        
     }
 
     @Override
