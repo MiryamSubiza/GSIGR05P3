@@ -8,6 +8,10 @@
 
 package GSILabs.BModel;
 
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -17,7 +21,7 @@ import java.util.Iterator;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Collective implements Performer {
+public class Collective implements Performer, XMLRepresentable {
     
     //Ha de ser una colección sin ordenación -> HashSet no tiene ordenación y no permite duplicados
     private HashSet <Artist> artists; // Todos los artistas que componen el colectivo
@@ -169,6 +173,28 @@ public class Collective implements Performer {
     public String toString () {
         return "COLLECTIVE\nName: " + name + "\nWork description: " + workDescription + 
                 "\nWebsite: " + webSite + "\n";
+    }
+    
+    @Override
+    public String toXML() {
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("collective", Collective.class);
+        xStream.alias("artists", Artist.class);
+        String xml = xStream.toXML(this);        
+        return xml;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
             
 }
