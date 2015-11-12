@@ -182,7 +182,7 @@ public class Collective implements Performer, XMLRepresentable {
         XStream xStream = new XStream(new DomDriver());
         // Cambio el alias de la clase en XML
         xStream.alias("collective", Collective.class);
-        xStream.alias("artists", Artist.class);
+        xStream.alias("artist", Artist.class);
         String xml = xStream.toXML(this);        
         return xml;
     }
