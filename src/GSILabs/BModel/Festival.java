@@ -377,6 +377,8 @@ public class Festival implements LastingEvent, XMLRepresentable {
         xStream.alias("festival", Festival.class);
         xStream.alias("concert", Concert.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
+        xStream.alias("artist", Artist.class);
+        xStream.alias("collective", Collective.class);
         String xml = xStream.toXML(this);        
         return xml;
     }
