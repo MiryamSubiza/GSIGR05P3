@@ -12,6 +12,8 @@ import GSILabs.Serializable.XMLRepresentable;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 /**
  * Registro de la venta de una entrada a un cliente
@@ -170,7 +172,34 @@ public class Sales implements XMLRepresentable {
 
     @Override
     public boolean saveToXML(File f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean respuesta = false;
+        XStream xStream = new XStream(new DomDriver());
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try{
+            fichero = new FileWriter(f);
+            pw = new PrintWriter(fichero);
+            pw.println(toXML());            
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero){
+              fichero.close();
+              respuesta = true;
+           }
+           else{
+               respuesta = false;
+           }
+              
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+        return respuesta;
     }
 
     @Override
