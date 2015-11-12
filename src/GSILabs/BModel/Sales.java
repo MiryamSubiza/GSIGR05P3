@@ -8,13 +8,18 @@
 
 package GSILabs.BModel;
 
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
+
 /**
  * Registro de la venta de una entrada a un cliente
  * @author subiza.79082
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Sales {
+public class Sales implements XMLRepresentable {
     
     private Ticket ticket;
     private Client client;
@@ -147,5 +152,29 @@ public class Sales {
                 "\nPrice of the ticket: " + price + "€\nCredit card: " +
                 cCard + "\nDate: " + dateSale.fechaToString() + "\nHour: " +
                 dateSale.horaToString() + "\n";
+    }
+    
+    @Override
+    public String toXML() {
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("sale", Festival.class);
+        xStream.alias("ticket", Ticket.class);
+        xStream.alias("client", Client.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        String xml = xStream.toXML(this);        
+        return xml;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
