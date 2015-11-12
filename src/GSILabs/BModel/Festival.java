@@ -7,10 +7,14 @@
  */
 package GSILabs.BModel;
 
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Evento compuesto por uno o varios conciertos, el festival puede extenderse 
@@ -19,7 +23,7 @@ import java.util.HashSet;
  * @author izu.78236
  * @version 03/10/2015
  */
-public class Festival implements LastingEvent {
+public class Festival implements LastingEvent, XMLRepresentable {
 
     private HashSet <Concert> concerts;
     private FechaCompleta startDateFestival;
@@ -360,6 +364,28 @@ public class Festival implements LastingEvent {
                 startTimeFestival.horaToString() + "h\nClosing date: " + 
                 closingDateFestival.fechaToString() + "\nClosing time: " + 
                 closingTimeFestival.horaToString() + "h\nConciertos:\n" + concerts.toString() + "\n";
+    }
+    
+    @Override
+    public String toXML() {
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("festival", Festival.class);
+        xStream.alias("concert", Concert.class);
+        String xml = xStream.toXML(this);        
+        return xml;
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
