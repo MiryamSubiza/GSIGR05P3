@@ -17,7 +17,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Representa el derecho mono o multipersonal para entrar a un evento, validando
