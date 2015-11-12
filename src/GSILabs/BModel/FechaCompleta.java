@@ -8,13 +8,20 @@
 
 package GSILabs.BModel;
 
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 /**
  * Extensión de la clase Date para poder obtener los días de las fechas
  * @author subiza.79082
  * @author izu.78236
  * @version 03/10/2015
  */
-public class FechaCompleta extends java.util.Date {
+public class FechaCompleta extends java.util.Date implements XMLRepresentable {
     
     private int dia;
     private int mes;
@@ -177,6 +184,55 @@ public class FechaCompleta extends java.util.Date {
                     && (this.getDia() == fh.getDia());
         }
         else return false;
+    }
+
+    @Override
+    public String toXML() {
+        // Creo el objeto xStream por el cual convertire la clase en un
+        // datos en XML
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        return xStream.toXML(this);
+    }
+
+    @Override
+    public boolean saveToXML(File f) {
+        
+        boolean respuesta = false;
+        XStream xStream = new XStream(new DomDriver());
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try{
+            fichero = new FileWriter(f);
+            pw = new PrintWriter(fichero);
+            pw.println(toXML());            
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero){
+              fichero.close();
+              respuesta = true;
+           }
+           else{
+               respuesta = false;
+           }
+              
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+        return respuesta;
+        
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
