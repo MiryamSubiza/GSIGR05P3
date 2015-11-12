@@ -6,7 +6,7 @@
  * during the first semester of the Academic Year 2015-2016
  */
  
- package GSILabs.serializable;
+ package GSILabs.Serializable;
 
 import java.io.File;
 
