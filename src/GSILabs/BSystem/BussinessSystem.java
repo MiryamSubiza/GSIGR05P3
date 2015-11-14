@@ -9,8 +9,13 @@
 package GSILabs.BSystem;
 
 import GSILabs.BModel.*;
+import GSILabs.Serializable.XMLRepresentable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,7 +34,7 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
  * @author izu.78236
  * @version 02/10/2015
  */
-public class BussinessSystem implements TicketOffice {
+public class BussinessSystem implements TicketOffice, XMLRepresentable {
     
     private HashMap <Integer, Client> clients;
     private HashSet <Sales> sales;
@@ -1358,6 +1363,120 @@ public class BussinessSystem implements TicketOffice {
         }
         return numFestivalesOk;
         
+    }
+    
+    /* IMPLEMENTACIÓN DEL INTERFAZ XMLRepresentable */
+    
+    @Override
+    public String toXML() {
+        String xml = "";
+        
+        //Locations
+        Iterator i = locations.values().iterator();
+        Location locationAux;
+        while (i.hasNext()) {
+            locationAux = (Location)i.next();
+            xml = xml + locationAux.toXML();
+        }
+        //Artists
+        i = artists.values().iterator();
+        Artist artistAux;
+        while (i.hasNext()) {
+            artistAux = (Artist)i.next();
+            xml = xml + artistAux.toXML();
+        }
+        //Collectives
+        i = collectives.values().iterator();
+        Collective collectiveAux;
+        while (i.hasNext()) {
+            collectiveAux = (Collective)i.next();
+            xml = xml + collectiveAux.toXML();
+        }
+        //Concerts
+        i = concerts.values().iterator();
+        Concert concertAux;
+        while (i.hasNext()) {
+            concertAux = (Concert)i.next();
+            xml = xml + concertAux.toXML();
+        }
+        //Exhibitions
+        i = exhibitions.values().iterator();
+        Exhibition exhibitionAux;
+        while (i.hasNext()) {
+            exhibitionAux = (Exhibition)i.next();
+            xml = xml + exhibitionAux.toXML();
+        }
+        //Festivals
+        i = festivals.values().iterator();
+        Festival festivalAux;
+        while (i.hasNext()) {
+            festivalAux = (Festival)i.next();
+            xml = xml + festivalAux.toXML();
+        }
+        //Clients
+        i = clients.values().iterator();
+        Client clientAux;
+        while (i.hasNext()) {
+            clientAux = (Client)i.next();
+            xml = xml + clientAux.toXML();
+        }
+        //Tickets
+        i = tickets.values().iterator();
+        Ticket ticketAux;
+        while (i.hasNext()) {
+            ticketAux = (Ticket)i.next();
+            xml = xml + ticketAux.toXML();
+        }
+        //Sales
+        i = sales.iterator();
+        Sales saleAux;
+        while (i.hasNext()) {
+            saleAux = (Sales)i.next();
+            xml = xml + saleAux.toXML();
+        }
+        return xml;
+    }
+    
+    
+    //Si el fichero ya existe, se sobreescribe
+    @Override
+    public boolean saveToXML(File f) {
+        boolean respuesta = false;
+        XStream xStream = new XStream(new DomDriver());
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter(f);
+            pw = new PrintWriter(fichero);
+            pw.println(toXML());            
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                   fichero.close();
+                   respuesta = true;
+                }
+                else {
+                    respuesta = false;
+                }
+            }
+            catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return respuesta;
+    }
+
+    @Override
+    public boolean saveToXML(String filePath) {
+        //Creación del fichero en la ruta especificada
+        File f = new File(filePath);
+        return this.saveToXML(f);
     }
     
 }
