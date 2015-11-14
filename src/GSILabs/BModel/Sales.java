@@ -180,34 +180,37 @@ public class Sales implements XMLRepresentable {
         XStream xStream = new XStream(new DomDriver());
         FileWriter fichero = null;
         PrintWriter pw = null;
-        try{
+        try {
             fichero = new FileWriter(f);
             pw = new PrintWriter(fichero);
             pw.println(toXML());            
         }
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        }
+        finally {
             try {
-           // Nuevamente aprovechamos el finally para 
-           // asegurarnos que se cierra el fichero.
-           if (null != fichero){
-              fichero.close();
-              respuesta = true;
-           }
-           else{
-               respuesta = false;
-           }
-              
-           } catch (Exception e2) {
-              e2.printStackTrace();
-           }
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                    respuesta = true;
+                }
+                else {
+                    respuesta = false;
+                }
+            }
+            catch (Exception e2) {
+                e2.printStackTrace();
+            }
         }
         return respuesta;
     }
 
     @Override
     public boolean saveToXML(String filePath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Creación del fichero en la ruta especificada
+        File f = new File(filePath);
+        return this.saveToXML(f);
     }
 }
