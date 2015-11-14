@@ -12,6 +12,7 @@ package GSILabs.Serializable;
 
 import GSILabs.BSystem.*;
 import GSILabs.BModel.*;
+import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -26,7 +27,10 @@ public class Test {
             new FechaCompleta("21/08/2016", "17:30"), new FechaCompleta("28/08/2016", "20:00"),
             a4, "www.universalmusic.es", l3);        
         Ticket t = new Ticket(ex,1,4);
-        System.out.println(t.toXML());
+        File fichero = new File("ticket.xml");
+        t.saveToXML(fichero);
+        
+        a4.saveToXML("C:/Users/miryam/Desktop/artist.xml");
         
     }
     
