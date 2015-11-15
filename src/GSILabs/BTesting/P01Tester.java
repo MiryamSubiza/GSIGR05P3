@@ -10,6 +10,7 @@ package GSILabs.BTesting;
 
 import GSILabs.BModel.*;
 import GSILabs.BSystem.BussinessSystem;
+import java.io.File;
 import java.util.Iterator;
 
 /**
@@ -389,7 +390,9 @@ public class P01Tester {
         pruebaS8 ();
         pruebaS9 ();
         pruebaS10();
-        pruebaP3();
+        pruebaP3_01();
+        pruebaP3_02();
+        pruebaP3_03();
         
     }
     
@@ -558,8 +561,17 @@ public class P01Tester {
         
     }
     
-    public static void pruebaP3() {
+    public static void pruebaP3_01() {
         System.out.println(bussinessSystem.toXML());
+    }
+    
+    public static void pruebaP3_02() {
+        File fichero = new File("bussinessSystem.xml");
+        bussinessSystem.saveToXML(fichero);
+    }
+    
+    public static void pruebaP3_03() {
+        bussinessSystem.saveToXML("C:/Users/miryam/Desktop/bussinessSystem.xml");
     }
     
 }
