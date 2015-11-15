@@ -1376,63 +1376,63 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         Location locationAux;
         while (i.hasNext()) {
             locationAux = (Location)i.next();
-            xml = xml + locationAux.toXML();
+            xml = xml + locationAux.toXML() + "\n";
         }
         //Artists
         i = artists.values().iterator();
         Artist artistAux;
         while (i.hasNext()) {
             artistAux = (Artist)i.next();
-            xml = xml + artistAux.toXML();
+            xml = xml + artistAux.toXML() + "\n";
         }
         //Collectives
         i = collectives.values().iterator();
         Collective collectiveAux;
         while (i.hasNext()) {
             collectiveAux = (Collective)i.next();
-            xml = xml + collectiveAux.toXML();
+            xml = xml + collectiveAux.toXML() + "\n";
         }
         //Concerts
         i = concerts.values().iterator();
         Concert concertAux;
         while (i.hasNext()) {
             concertAux = (Concert)i.next();
-            xml = xml + concertAux.toXML();
+            xml = xml + concertAux.toXML() + "\n";
         }
         //Exhibitions
         i = exhibitions.values().iterator();
         Exhibition exhibitionAux;
         while (i.hasNext()) {
             exhibitionAux = (Exhibition)i.next();
-            xml = xml + exhibitionAux.toXML();
+            xml = xml + exhibitionAux.toXML() + "\n";
         }
         //Festivals
         i = festivals.values().iterator();
         Festival festivalAux;
         while (i.hasNext()) {
             festivalAux = (Festival)i.next();
-            xml = xml + festivalAux.toXML();
+            xml = xml + festivalAux.toXML() + "\n";
         }
         //Clients
         i = clients.values().iterator();
         Client clientAux;
         while (i.hasNext()) {
             clientAux = (Client)i.next();
-            xml = xml + clientAux.toXML();
+            xml = xml + clientAux.toXML() + "\n";
         }
         //Tickets
         i = tickets.values().iterator();
         Ticket ticketAux;
         while (i.hasNext()) {
             ticketAux = (Ticket)i.next();
-            xml = xml + ticketAux.toXML();
+            xml = xml + ticketAux.toXML() + "\n";
         }
         //Sales
         i = sales.iterator();
         Sales saleAux;
         while (i.hasNext()) {
             saleAux = (Sales)i.next();
-            xml = xml + saleAux.toXML();
+            xml = xml + saleAux.toXML() + "\n";
         }
         return xml;
     }
