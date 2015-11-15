@@ -389,6 +389,7 @@ public class P01Tester {
         pruebaS8 ();
         pruebaS9 ();
         pruebaS10();
+        pruebaP3();
         
     }
     
@@ -555,6 +556,10 @@ public class P01Tester {
         if (bussinessSystem.addClient(clientS10)) System.out.println("El cliente ha sido introducido\n");
         else System.out.println("El cliente no ha sido introducido, es menor de edad\n");
         
+    }
+    
+    public static void pruebaP3() {
+        System.out.println(bussinessSystem.toXML());
     }
     
 }
