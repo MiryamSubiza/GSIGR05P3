@@ -361,11 +361,15 @@ public class Festival implements LastingEvent, XMLRepresentable {
      */
     @Override
     public String toString() {
+        String aux = "";
+        for (Concert concert : concerts) {
+            aux = aux + "->" + concert.toString();
+        }
         return "FESTIVAL\nFestival's name: " + festivalName + "\nStart date: " + 
                 startDateFestival.fechaToString() + "\nStart time: " + 
                 startTimeFestival.horaToString() + "h\nClosing date: " + 
                 closingDateFestival.fechaToString() + "\nClosing time: " + 
-                closingTimeFestival.horaToString() + "h\nConciertos:\n" + concerts.toString() + "\n";
+                closingTimeFestival.horaToString() + "h\n" + aux + "\n";
     }
     
     @Override
