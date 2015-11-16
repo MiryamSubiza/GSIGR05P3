@@ -86,7 +86,8 @@ public class XMLParser {
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream.alias("Client", Client.class);
+        xStream.alias("client", Client.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
         // Habria que poner un try para controlar la XStreamException
         // si el objeto no puede ser deserializable
         Client cli = (Client)xStream.fromXML(f);
