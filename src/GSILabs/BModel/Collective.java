@@ -178,7 +178,7 @@ public class Collective implements Performer, XMLRepresentable {
             aux = aux + "->" + artist.toString();
         }
         return "COLLECTIVE\nName: " + name + "\nWork description: " + workDescription + 
-                "\nWebsite: " + webSite + "\n" + aux;
+                "\nWebsite: " + webSite + "\n" + aux + "\n";
     }
     
     @Override
