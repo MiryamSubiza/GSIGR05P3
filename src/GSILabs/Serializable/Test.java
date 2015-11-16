@@ -10,8 +10,8 @@ package GSILabs.Serializable;
  * @author Alex
  */
 
+import GSILabs.persistence.XMLParser;
 import GSILabs.BModel.*;
-import GSILabs.persistance.*;
 import java.io.File;
 
 
@@ -38,14 +38,12 @@ public class Test {
         Ticket t = new Ticket(ex,1,4);
         Sales s = new Sales(t,cli,15.0f,"00838u39", new FechaCompleta("14/11/2015", "20:00"));
         
-        File fichero = new File("artist.xml");
-        String str = s.toXML();
-        System.out.println(str);
-        Sales aux = XMLParser.parseSales(str);
         
+        t.saveToXML("ticket.xml");
+        File fichero = new File("ticket.xml");
+        
+        Ticket aux = XMLParser.parseTicket(fichero);
         System.out.println(aux.toString());
-        
-        //a4.saveToXML("C:/Users/miryam/Desktop/artist.xml");
         
     }
     
