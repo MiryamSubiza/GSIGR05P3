@@ -281,7 +281,7 @@ public class Concert implements ImpermanentEvent, XMLRepresentable {
                 "\nDoor opening: " + doorOpeningTimeConcert.horaToString() + 
                 "h\nStart time: " + startTimeConcert.horaToString() + 
                 "h\nClosing time: " + closingTimeConcert.horaToString() + 
-                "h\nLocation: " + location.getName() + "\n";
+                "h\n->" + location.toString() + "\n";
     }
 
     @Override
