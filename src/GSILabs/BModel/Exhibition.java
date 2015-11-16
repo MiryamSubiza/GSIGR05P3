@@ -388,7 +388,7 @@ public class Exhibition implements LastingEvent, XMLRepresentable {
                 startTimeExhibition.horaToString() + "h\nClosing date: " + 
                 closingDateExhibition.fechaToString() + "\nClosing time: " + 
                 closingTimeExhibition.horaToString() + "h\nPerformer: " + p.getName() + 
-                "\nLocation: " + location.getName() + "\n";
+                "\n->" + location.toString() + "\n";
     }
 
     @Override
