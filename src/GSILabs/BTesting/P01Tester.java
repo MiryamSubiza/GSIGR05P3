@@ -30,7 +30,7 @@ public class P01Tester {
     private static Location[] locations = new Location[7];
     private static Concert[] concerts = new Concert[7];
     private static Festival[] festivals = new Festival[2];
-    private static Exhibition[] exhibitions = new Exhibition[2];
+    private static Exhibition[] exhibitions = new Exhibition[3];
     private static Ticket[] tickets = new Ticket[12];
     private static Client[] clients = new Client[8];
     
@@ -492,7 +492,7 @@ public class P01Tester {
     }
     
     public static void pruebaP3_03() {
-        bussinessSystem.saveToXML("C:/Users/miryam/Desktop/bussinessSystem.xml");
+        bussinessSystem.saveToXML("C:/Users/mirya/Desktop/bussinessSystem.xml");
     }
     
 }
