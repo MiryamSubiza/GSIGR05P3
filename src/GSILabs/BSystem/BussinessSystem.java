@@ -1499,6 +1499,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         // Creo el objeto xStream por el cual convertire el string en un
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
+        xStream.alias("bussinessSystem", BussinessSystem.class);
         xStream.alias("client", Client.class);
         xStream.alias("sales", Sales.class);
         xStream.alias("ticket", Ticket.class);
