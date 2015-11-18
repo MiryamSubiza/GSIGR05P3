@@ -314,6 +314,7 @@ public class P01Tester {
         pruebaP3_01();
         pruebaP3_02();
         pruebaP3_03();
+        pruebaP3_05();
         
     }
     
@@ -493,6 +494,12 @@ public class P01Tester {
     
     public static void pruebaP3_03() {
         bussinessSystem.saveToXML("C:/Users/mirya/Desktop/bussinessSystem.xml");
+    }
+    
+    public static void pruebaP3_05() {
+        File f = new File("bussinessSystem.xml");
+        BussinessSystem bs = BussinessSystem.parseXMLFile(f);
+        System.out.println(bs);
     }
     
 }
