@@ -192,7 +192,7 @@ public class XMLParser {
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream .alias("exhibition", Exhibition.class);
+        xStream.alias("exhibition", Exhibition.class);
         xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
@@ -215,7 +215,7 @@ public class XMLParser {
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream .alias("exhibition", Exhibition.class);
+        xStream.alias("exhibition", Exhibition.class);
         xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
@@ -238,7 +238,7 @@ public class XMLParser {
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream .alias("fechacompleta", FechaCompleta.class);        
+        xStream.alias("fechacompleta", FechaCompleta.class);        
         // Habria que poner un try para controlar la XStreamException
         // si el objeto no puede ser deserializable
         FechaCompleta fecha = (FechaCompleta)xStream.fromXML(str);
@@ -257,7 +257,7 @@ public class XMLParser {
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream .alias("fechacompleta", FechaCompleta.class);       
+        xStream.alias("fechacompleta", FechaCompleta.class);       
         // Habria que poner un try para controlar la XStreamException
         // si el objeto no puede ser deserializable
         FechaCompleta fecha = (FechaCompleta)xStream.fromXML(f);
@@ -276,9 +276,9 @@ public class XMLParser {
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream .alias("festival", Festival.class);
-        xStream .alias("concert", Concert.class);
-        xStream .alias("exhibition", Exhibition.class);
+        xStream.alias("festival", Festival.class);
+        xStream.alias("concert", Concert.class);
+        xStream.alias("exhibition", Exhibition.class);
         xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
@@ -301,9 +301,9 @@ public class XMLParser {
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream .alias("festival", Festival.class);
-        xStream .alias("concert", Concert.class);
-        xStream .alias("exhibition", Exhibition.class);
+        xStream.alias("festival", Festival.class);
+        xStream.alias("concert", Concert.class);
+        xStream.alias("exhibition", Exhibition.class);
         xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
@@ -422,7 +422,7 @@ public class XMLParser {
         xStream.alias("festival", Festival.class);
         xStream.alias("location", Location.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
-        xStream.alias("artists", Artist.class);
+        xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
         // Habria que poner un try para controlar la XStreamException
         // si el objeto no puede ser deserializable
@@ -448,7 +448,7 @@ public class XMLParser {
         xStream.alias("festival", Festival.class);
         xStream.alias("location", Location.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
-        xStream.alias("artists", Artist.class);
+        xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
         // Habria que poner un try para controlar la XStreamException
         // si el objeto no puede ser deserializable
