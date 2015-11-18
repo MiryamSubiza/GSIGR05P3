@@ -1371,6 +1371,20 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
     public String toXML() {
         String xml = "";
         
+        XStream xStream = new XStream(new DomDriver());
+        // Cambio el alias de la clase en XML
+        xStream.alias("bussinessSystem", BussinessSystem.class);
+        xStream.alias("sales", Sales.class);
+        xStream.alias("ticket", Ticket.class);
+        xStream.alias("client", Client.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        xStream.alias("artist", Artist.class);
+        xStream.alias("concert", Concert.class);
+        xStream.alias("festival", Festival.class);
+        xStream.alias("exhibition", Exhibition.class);       
+        String xml2 = xStream.toXML(this);
+        
+        
         //Locations
         Iterator i = locations.values().iterator();
         Location locationAux;
@@ -1434,7 +1448,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
             saleAux = (Sales)i.next();
             xml = xml + saleAux.toXML() + "\n";
         }
-        return xml;
+        return xml2;
     }
     
     
@@ -1479,4 +1493,32 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         return this.saveToXML(f);
     }
     
+    //public static BussinessSystem parseXMLFile(File f) throws XMLParsingException {
+    public static BussinessSystem parseXMLFile(File f) {
+        
+        // Creo el objeto xStream por el cual convertire el string en un
+        // objeto de java
+        XStream xStream = new XStream(new DomDriver());
+        xStream.alias("client", Client.class);
+        xStream.alias("sales", Sales.class);
+        xStream.alias("ticket", Ticket.class);
+        xStream.alias("artist", Artist.class);
+        xStream.alias("collective", Collective.class);
+        xStream.alias("concert", Concert.class);
+        xStream.alias("exhibition", Exhibition.class);
+        xStream.alias("festival", Festival.class);
+        xStream.alias("location", Location.class);
+        xStream.alias("fechacompleta", FechaCompleta.class);
+        
+        // Habria que poner un try para controlar la XStreamException
+        // si el objeto no puede ser deserializable
+        BussinessSystem bs = (BussinessSystem)xStream.fromXML(f);
+        return bs;
+        
+    }
+    /*
+    public boolean loadXMLFile(File f) {
+        
+    }
+    */
 }
