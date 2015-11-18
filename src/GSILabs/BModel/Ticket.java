@@ -226,7 +226,7 @@ public class Ticket implements XMLRepresentable {
         xStream.alias("festival", Festival.class);
         xStream.alias("location", Location.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
-        xStream.alias("artists", Artist.class);
+        xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
         String xml = xStream.toXML(this);        
         return xml;
