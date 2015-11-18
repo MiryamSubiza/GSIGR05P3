@@ -9,11 +9,6 @@
 package GSILabs.BModel;
 import java.io.FileWriter;
 import java.io.IOException;
-import org.jdom.Attribute;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
 import GSILabs.Serializable.*;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
