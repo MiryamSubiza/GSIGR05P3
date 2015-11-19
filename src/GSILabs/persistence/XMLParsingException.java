@@ -7,7 +7,9 @@ package GSILabs.persistence;
 
 /**
  *
- * @author Alex
+ * @author izu.78236
+ * @author subiza.79082
+ * @version 19/11/2015
  */
 public class XMLParsingException extends Exception{
     
