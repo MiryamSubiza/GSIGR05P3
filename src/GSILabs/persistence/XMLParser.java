@@ -7,6 +7,7 @@ package GSILabs.persistence;
 
 import GSILabs.BModel.*;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 
@@ -21,16 +22,23 @@ public class XMLParser {
      * a un objeto Artista si dicho código está bien escrito
      * @param str string con código XML
      * @return Un objeto artista.
+     * @throws GSILabs.persistence.XMLParsingException
      */
-    public static Artist parseArtist(String str){
+    public static Artist parseArtist(String str) throws XMLParsingException{
         
+        // Si el artista no se puede deserializar devolveremos un artista nulo
+        // para asegurarme de ello incializo el artista que devuelvo a nulo
+        Artist art = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
-        xStream.alias("artist", Artist.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Artist art = (Artist)xStream.fromXML(str);
+        xStream.alias("artist", Artist.class);        
+        try{
+            art = (Artist)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return art;
         
     }
@@ -41,16 +49,22 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto artista.
      */
-    public static Artist parseArtist(File f){
+    public static Artist parseArtist(File f)throws XMLParsingException{
         
+        // Si el artista no se puede deserializar devolveremos un artista nulo
+        // para asegurarme de ello incializo el artista que devuelvo a nulo
+        Artist art = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("artist", Artist.class);
-        xStream.alias("fechacompleta", FechaCompleta.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Artist art = (Artist)xStream.fromXML(f);
+        xStream.alias("fechacompleta", FechaCompleta.class);        
+        try{
+            art = (Artist)xStream.fromXML(f);
+        }
+        catch (XStreamException e){
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return art;
         
     }    
@@ -61,16 +75,20 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Client.
      */
-    public static Client parseClient(String str){
+    public static Client parseClient(String str) throws XMLParsingException{
         
+        Client cli = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("client", Client.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Client cli = (Client)xStream.fromXML(str);
+        try{
+            cli = (Client)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return cli;
         
     }
@@ -81,16 +99,20 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Client.
      */
-    public static Client parseClient(File f){
+    public static Client parseClient(File f) throws XMLParsingException{
         
+        Client cli = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("client", Client.class);
-        xStream.alias("fechacompleta", FechaCompleta.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Client cli = (Client)xStream.fromXML(f);
+        xStream.alias("fechacompleta", FechaCompleta.class);        
+        try{
+            cli = (Client)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return cli;
         
     }
@@ -101,16 +123,20 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Collective.
      */
-    public static Collective parseCollective(String str){
+    public static Collective parseCollective(String str) throws XMLParsingException{
         
+        Collective col = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("collective", Collective.class);
         xStream.alias("artist", Artist.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Collective col = (Collective)xStream.fromXML(str);
+        try{
+            col = (Collective)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return col;
         
     }
@@ -121,16 +147,20 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Collective.
      */
-    public static Collective parseCollective(File f){
+    public static Collective parseCollective(File f) throws XMLParsingException{
         
+        Collective col = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("collective", Collective.class);
         xStream.alias("artist", Artist.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Collective col = (Collective)xStream.fromXML(f);
+        try{
+            col = (Collective)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return col;
         
     }
@@ -141,8 +171,9 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Concert.
      */
-    public static Concert parseConcert(String str){
+    public static Concert parseConcert(String str) throws XMLParsingException{
         
+        Concert c = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -151,9 +182,12 @@ public class XMLParser {
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Concert c = (Concert)xStream.fromXML(str);
+        try{
+            c = (Concert)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return c;
         
     }
@@ -164,8 +198,9 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Concert.
      */
-    public static Concert parseConcert(File f){
+    public static Concert parseConcert(File f) throws XMLParsingException{
         
+        Concert c = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -174,9 +209,12 @@ public class XMLParser {
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Concert c = (Concert)xStream.fromXML(f);
+        try{
+            c = (Concert)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return c;
         
     }
@@ -187,8 +225,9 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Exhibition.
      */
-    public static Exhibition parseExhibition(String str){
+    public static Exhibition parseExhibition(String str) throws XMLParsingException{
         
+        Exhibition exh = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -197,10 +236,13 @@ public class XMLParser {
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Exhibition e = (Exhibition)xStream.fromXML(str);
-        return e;
+        try{
+            exh = (Exhibition)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
+        return exh;
         
     }
     
@@ -210,8 +252,9 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Exhibition.
      */
-    public static Exhibition parseExhibition(File f){
+    public static Exhibition parseExhibition(File f) throws XMLParsingException{
         
+        Exhibition exh = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -220,10 +263,14 @@ public class XMLParser {
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Exhibition e = (Exhibition)xStream.fromXML(f);
-        return e;
+        
+        try{
+            exh = (Exhibition)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
+        return exh;
         
     }
     
@@ -233,15 +280,19 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto FechaCompleta.
      */
-    public static FechaCompleta parseFechaCompleta(String str){
+    public static FechaCompleta parseFechaCompleta(String str) throws XMLParsingException{
         
+        FechaCompleta fecha = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("fechacompleta", FechaCompleta.class);        
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        FechaCompleta fecha = (FechaCompleta)xStream.fromXML(str);
+        try{
+            fecha = (FechaCompleta)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return fecha;
         
     }
@@ -252,15 +303,19 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto FechaCompleta.
      */
-    public static FechaCompleta parseFechaCompleta(File f){
+    public static FechaCompleta parseFechaCompleta(File f) throws XMLParsingException{
         
+        FechaCompleta fecha = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("fechacompleta", FechaCompleta.class);       
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        FechaCompleta fecha = (FechaCompleta)xStream.fromXML(f);
+        try{
+            fecha = (FechaCompleta)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return fecha;
         
     }
@@ -271,8 +326,9 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Festival.
      */
-    public static Festival parseFestival(String str){
+    public static Festival parseFestival(String str) throws XMLParsingException{
         
+        Festival fest = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -283,9 +339,12 @@ public class XMLParser {
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Festival fest = (Festival)xStream.fromXML(str);
+        try{
+            fest = (Festival)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return fest;
         
     }
@@ -296,8 +355,9 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Festival.
      */
-    public static Festival parseFestival(File f){
+    public static Festival parseFestival(File f) throws XMLParsingException{
         
+        Festival fest = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -308,9 +368,12 @@ public class XMLParser {
         xStream.alias("collective", Collective.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Festival fest = (Festival)xStream.fromXML(f);
+        try{
+            fest = (Festival)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return fest;
         
     }
@@ -321,15 +384,19 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Location.
      */
-    public static Location parseLocation(String str){
+    public static Location parseLocation(String str) throws XMLParsingException{
         
+        Location l = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Location l = (Location)xStream.fromXML(str);
+        try{
+            l = (Location)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return l;
         
     }
@@ -340,15 +407,19 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Location.
      */
-    public static Location parseLocation(File f){
+    public static Location parseLocation(File f) throws XMLParsingException{
         
+        Location l = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("location", Location.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Location l = (Location)xStream.fromXML(f);
+        try{
+            l = (Location)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return l;
         
     }
@@ -359,8 +430,9 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Sales.
      */
-    public static Sales parseSales(String str){
+    public static Sales parseSales(String str) throws XMLParsingException{
         
+        Sales s = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -372,9 +444,12 @@ public class XMLParser {
         xStream.alias("concert", Concert.class);
         xStream.alias("festival", Festival.class);
         xStream.alias("exhibition", Exhibition.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Sales s = (Sales)xStream.fromXML(str);
+        try{
+            s = (Sales)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return s;
         
     }
@@ -385,8 +460,9 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Sales.
      */
-    public static Sales parseSales(File f){
+    public static Sales parseSales(File f) throws XMLParsingException{
         
+        Sales s = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -398,9 +474,12 @@ public class XMLParser {
         xStream.alias("concert", Concert.class);
         xStream.alias("festival", Festival.class);
         xStream.alias("exhibition", Exhibition.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Sales s = (Sales)xStream.fromXML(f);
+        try{
+            s = (Sales)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return s;
         
     }
@@ -411,8 +490,9 @@ public class XMLParser {
      * @param str string con código XML
      * @return Un objeto Ticket.
      */
-    public static Ticket parseTicket(String str){
+    public static Ticket parseTicket(String str) throws XMLParsingException{
         
+        Ticket t = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -424,9 +504,12 @@ public class XMLParser {
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Ticket t = (Ticket)xStream.fromXML(str);
+        try{
+            t = (Ticket)xStream.fromXML(str);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage());
+        }
         return t;
         
     }
@@ -437,8 +520,9 @@ public class XMLParser {
      * @param f fichero con código XML
      * @return Un objeto Ticket.
      */
-    public static Ticket parseTicket(File f){
+    public static Ticket parseTicket(File f) throws XMLParsingException{
         
+        Ticket t = null;
         // Creo el objeto xStream por el cual convertire el string en una
         // objeto de java
         XStream xStream = new XStream(new DomDriver());
@@ -450,9 +534,12 @@ public class XMLParser {
         xStream.alias("fechacompleta", FechaCompleta.class);
         xStream.alias("artist", Artist.class);
         xStream.alias("collective", Collective.class);
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        Ticket t = (Ticket)xStream.fromXML(f);
+        try{
+            t = (Ticket)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return t;
         
     }
