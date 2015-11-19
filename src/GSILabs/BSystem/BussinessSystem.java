@@ -10,7 +10,9 @@ package GSILabs.BSystem;
 
 import GSILabs.BModel.*;
 import GSILabs.Serializable.XMLRepresentable;
+import GSILabs.persistence.XMLParsingException;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.XStreamException;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
@@ -1368,9 +1370,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
     /* IMPLEMENTACIÓN DEL INTERFAZ XMLRepresentable */
     
     @Override
-    public String toXML() {
-        String xml = "";
-        
+    public String toXML() {        
         XStream xStream = new XStream(new DomDriver());
         // Cambio el alias de la clase en XML
         xStream.alias("bussinessSystem", BussinessSystem.class);
@@ -1383,71 +1383,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         xStream.alias("festival", Festival.class);
         xStream.alias("exhibition", Exhibition.class);       
         String xml2 = xStream.toXML(this);
-        
-        
-        //Locations
-        Iterator i = locations.values().iterator();
-        Location locationAux;
-        while (i.hasNext()) {
-            locationAux = (Location)i.next();
-            xml = xml + locationAux.toXML() + "\n";
-        }
-        //Artists
-        i = artists.values().iterator();
-        Artist artistAux;
-        while (i.hasNext()) {
-            artistAux = (Artist)i.next();
-            xml = xml + artistAux.toXML() + "\n";
-        }
-        //Collectives
-        i = collectives.values().iterator();
-        Collective collectiveAux;
-        while (i.hasNext()) {
-            collectiveAux = (Collective)i.next();
-            xml = xml + collectiveAux.toXML() + "\n";
-        }
-        //Concerts
-        i = concerts.values().iterator();
-        Concert concertAux;
-        while (i.hasNext()) {
-            concertAux = (Concert)i.next();
-            xml = xml + concertAux.toXML() + "\n";
-        }
-        //Exhibitions
-        i = exhibitions.values().iterator();
-        Exhibition exhibitionAux;
-        while (i.hasNext()) {
-            exhibitionAux = (Exhibition)i.next();
-            xml = xml + exhibitionAux.toXML() + "\n";
-        }
-        //Festivals
-        i = festivals.values().iterator();
-        Festival festivalAux;
-        while (i.hasNext()) {
-            festivalAux = (Festival)i.next();
-            xml = xml + festivalAux.toXML() + "\n";
-        }
-        //Clients
-        i = clients.values().iterator();
-        Client clientAux;
-        while (i.hasNext()) {
-            clientAux = (Client)i.next();
-            xml = xml + clientAux.toXML() + "\n";
-        }
-        //Tickets
-        i = tickets.values().iterator();
-        Ticket ticketAux;
-        while (i.hasNext()) {
-            ticketAux = (Ticket)i.next();
-            xml = xml + ticketAux.toXML() + "\n";
-        }
-        //Sales
-        i = sales.iterator();
-        Sales saleAux;
-        while (i.hasNext()) {
-            saleAux = (Sales)i.next();
-            xml = xml + saleAux.toXML() + "\n";
-        }
+
         return xml2;
     }
     
@@ -1458,7 +1394,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         boolean respuesta = false;
         XStream xStream = new XStream(new DomDriver());
         FileWriter fichero = null;
-        PrintWriter pw = null;
+        PrintWriter pw;
         try {
             fichero = new FileWriter(f);
             pw = new PrintWriter(fichero);
@@ -1470,7 +1406,7 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         finally {
             try {
                 // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
+                // asegurarnos de que se cierra el fichero
                 if (null != fichero) {
                    fichero.close();
                    respuesta = true;
@@ -1493,11 +1429,17 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         return this.saveToXML(f);
     }
     
-    //public static BussinessSystem parseXMLFile(File f) throws XMLParsingException {
-    public static BussinessSystem parseXMLFile(File f) {
+    /**
+     * Método para la lectura de ficheros
+     * @param f Fichero del cual voy a leer la información para crear los objetos
+     * @return Objeto BusinessSystem que contiene todos los objetos contenidos 
+     * en el fichero (si han podido ser deserializados)
+     * @throws XMLParsingException
+     */
+    public static BussinessSystem parseXMLFile(File f) throws XMLParsingException {
+    
+        BussinessSystem bs;
         
-        // Creo el objeto xStream por el cual convertire el string en un
-        // objeto de java
         XStream xStream = new XStream(new DomDriver());
         xStream.alias("bussinessSystem", BussinessSystem.class);
         xStream.alias("client", Client.class);
@@ -1511,15 +1453,14 @@ public class BussinessSystem implements TicketOffice, XMLRepresentable {
         xStream.alias("location", Location.class);
         xStream.alias("fechacompleta", FechaCompleta.class);
         
-        // Habria que poner un try para controlar la XStreamException
-        // si el objeto no puede ser deserializable
-        BussinessSystem bs = (BussinessSystem)xStream.fromXML(f);
+        try {
+            bs = (BussinessSystem)xStream.fromXML(f);
+        }
+        catch (XStreamException e){            
+            throw new XMLParsingException(e.getMessage(), f.getName());
+        }
         return bs;
         
     }
-    /*
-    public boolean loadXMLFile(File f) {
-        
-    }
-    */
+    
 }
