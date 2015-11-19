@@ -140,7 +140,7 @@ public class Artist implements Performer, XMLRepresentable {
         XStream xStream = new XStream(new DomDriver());
         // Cambio el alias de la clase en XML
         xStream.alias("artist", Artist.class);        
-        String xml = xStream.toXML(this);          
+        String xml = xStream.toXML(this);
         return xml;
     }
 
