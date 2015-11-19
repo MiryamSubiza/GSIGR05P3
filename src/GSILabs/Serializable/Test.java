@@ -12,12 +12,13 @@ package GSILabs.Serializable;
 
 import GSILabs.persistence.XMLParser;
 import GSILabs.BModel.*;
+import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 
 
 public class Test {
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws XMLParsingException{
 
         Artist a4 = new Artist("Nach", "Rapero alicantino", "www.nach.es");
         Artist a5 = new Artist("Alex Papito", "Master BOSS del Karaoke");
@@ -39,11 +40,22 @@ public class Test {
         Sales s = new Sales(t,cli,15.0f,"00838u39", new FechaCompleta("14/11/2015", "20:00"));
         
         
-        t.saveToXML("ticket.xml");
-        File fichero = new File("ticket.xml");
+        //a4.saveToXML("artist.xml");
+        File fichero = new File("artist.xml");
+        Artist aux = null;
         
-        Ticket aux = XMLParser.parseTicket(fichero);
-        System.out.println(aux.toString());
+        try{
+            aux = XMLParser.parseArtist(fichero);
+        }
+        catch (XMLParsingException e){
+            System.out.println("Se ha capturado una XMLParsingException:");
+            if(e.getFileName() != null){
+                System.out.println(e.getFileNameDescription());
+            }
+            System.out.println(e.getMessage());            
+        }        
+        
+        System.out.println(aux.toString());          
         
     }
     
