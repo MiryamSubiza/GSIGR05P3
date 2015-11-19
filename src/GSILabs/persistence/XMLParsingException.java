@@ -26,7 +26,6 @@ public class XMLParsingException extends Exception{
     
     /**
      *
-     * @param localizedError
      * @param errorMessage
      * @param fileName
      */
@@ -37,7 +36,7 @@ public class XMLParsingException extends Exception{
     
     @Override
     public String getMessage(){
-        return "El objeto contenido en el código XML no ha podido ser deserializado por la siguiente razon\n" + errorMessage;
+        return "El objeto contenido en el código XML no ha podido ser deserializado por la siguiente razón\n" + errorMessage;
     }
     
     public String getFileNameDescription(){
