@@ -10,6 +10,7 @@ package GSILabs.BTesting;
 
 import GSILabs.BModel.*;
 import GSILabs.BSystem.BussinessSystem;
+import GSILabs.persistence.XMLParsingException;
 import java.io.File;
 import java.util.Iterator;
 
@@ -498,8 +499,84 @@ public class P01Tester {
     
     public static void pruebaP3_05() {
         File f = new File("bussinessSystem.xml");
-        BussinessSystem bs = BussinessSystem.parseXMLFile(f);
-        System.out.println(bs);
+        BussinessSystem bs = new BussinessSystem();
+        try {
+            bs = BussinessSystem.parseXMLFile(f);
+        }
+        catch (XMLParsingException e) {
+            System.out.println("Se ha capturado una XMLParsingException:");
+            if(e.getFileName() != null){
+                System.out.println(e.getFileNameDescription());
+            }
+            System.out.println(e.getMessage()); 
+        }
+        /*
+        ** Para comprobar si se ha creado bien el objeto BusinessSystem
+        
+        //Locations
+        Iterator i = bs.getLocations().values().iterator();
+        Location locationAux;
+        while (i.hasNext()) {
+            locationAux = (Location)i.next();
+            System.out.println(locationAux.toString());
+        }
+        //Artists
+        i = bs.getArtists().values().iterator();
+        Artist artistAux;
+        while (i.hasNext()) {
+            artistAux = (Artist)i.next();
+            System.out.println(artistAux.toString());
+        }
+        //Collectives
+        i = bs.getCollectives().values().iterator();
+        Collective collectiveAux;
+        while (i.hasNext()) {
+            collectiveAux = (Collective)i.next();
+            System.out.println(collectiveAux.toString());
+        }
+        //Concerts
+        i = bs.getConcerts().values().iterator();
+        Concert concertAux;
+        while (i.hasNext()) {
+            concertAux = (Concert)i.next();
+            System.out.println(concertAux.toString());
+        }
+        //Exhibitions
+        i = bs.getExhibitions().values().iterator();
+        Exhibition exhibitionAux;
+        while (i.hasNext()) {
+            exhibitionAux = (Exhibition)i.next();
+            System.out.println(exhibitionAux.toString());
+        }
+        //Festivals
+        i = bs.getFestivals().values().iterator();
+        Festival festivalAux;
+        while (i.hasNext()) {
+            festivalAux = (Festival)i.next();
+            System.out.println(festivalAux.toString());
+        }
+        //Clients
+        i = bs.getClients().values().iterator();
+        Client clientAux;
+        while (i.hasNext()) {
+            clientAux = (Client)i.next();
+            System.out.println(clientAux.toString());
+        }
+        //Tickets
+        i = bs.getTickets().values().iterator();
+        Ticket ticketAux;
+        while (i.hasNext()) {
+            ticketAux = (Ticket)i.next();
+            System.out.println(ticketAux.toString());
+        }
+        //Sales
+        i = bs.getSales().iterator();
+        Sales saleAux;
+        while (i.hasNext()) {
+            saleAux = (Sales)i.next();
+            System.out.println(saleAux.toString());
+        }
+        */
     }
     
 }
