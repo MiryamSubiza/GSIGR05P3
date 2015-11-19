@@ -13,7 +13,8 @@ import java.io.File;
 
 /**
  *
- * @author Alex
+ * @author subiza.79082
+ * @author izu.78236
  */
 public class XMLParser {
     
