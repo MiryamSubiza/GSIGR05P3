@@ -8,7 +8,6 @@
 
 package GSILabs.BModel;
 import java.io.FileWriter;
-import java.io.IOException;
 import GSILabs.Serializable.*;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
