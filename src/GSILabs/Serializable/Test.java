@@ -39,8 +39,13 @@ public class Test {
         Ticket t = new Ticket(ex,1,4);
         Sales s = new Sales(t,cli,15.0f,"00838u39", new FechaCompleta("14/11/2015", "20:00"));
         
+        // **********************************************************************
+        // Para probar la excepcion tienes que ejecutarlo una vez y despues
+        // comenta la siguiente linea y modificar el archivo generado por ejemplo
+        // quitando alguna etiqueta
+        // **********************************************************************
+        a4.saveToXML("artist.xml");
         
-        //a4.saveToXML("artist.xml");
         File fichero = new File("artist.xml");
         Artist aux = null;
         
