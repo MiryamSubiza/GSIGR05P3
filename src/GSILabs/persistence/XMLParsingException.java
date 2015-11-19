@@ -16,7 +16,6 @@ public class XMLParsingException extends Exception{
     
     /**
      *
-     * @param localizedError
      * @param errorMessage
      */
     public XMLParsingException(String errorMessage){
