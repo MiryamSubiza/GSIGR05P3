@@ -302,19 +302,18 @@ public class P01Tester {
     //Comprobar y mostrar por línea de comandos varios sucesos
     public static void comprobacionDatos () {
         
-        pruebaS1 ();
-        pruebaS2 ();
-        pruebaS3 ();
-        pruebaS4 ();
-        pruebaS5 ();
-        pruebaS6 ();
-        pruebaS7 ();
-        pruebaS8 ();
-        pruebaS9 ();
-        pruebaS10();
-        pruebaP3_01();
+        //pruebaS1 ();
+        //pruebaS2 ();
+        //pruebaS3 ();
+        //pruebaS4 ();
+        //pruebaS5 ();
+        //pruebaS6 ();
+        //pruebaS7 ();
+        //pruebaS8 ();
+        //pruebaS9 ();
+        //pruebaS10();
+        System.out.println("PRUEBAS PARA ALGUNOS DE LOS EJERCICIOS DE LA PRACTICA 3");
         pruebaP3_02();
-        pruebaP3_03();
         pruebaP3_05();
         
     }
@@ -482,22 +481,20 @@ public class P01Tester {
         if (bussinessSystem.addClient(clientS10)) System.out.println("El cliente ha sido introducido\n");
         else System.out.println("El cliente no ha sido introducido, es menor de edad\n");
         
-    }
+    }        
     
-    public static void pruebaP3_01() {
-        System.out.println(bussinessSystem.toXML());
-    }
-    
+    // PRUEBA P03Ej02
     public static void pruebaP3_02() {
+        System.out.println("\nEJERCICO 2\n");
+        System.out.println("Esto es una prueba del ejercicio 2 de la practica 3:");
+        System.out.println(bussinessSystem.toXML());
         File fichero = new File("bussinessSystem.xml");
         bussinessSystem.saveToXML(fichero);
-    }
-    
-    public static void pruebaP3_03() {
-        bussinessSystem.saveToXML("C:/Users/mirya/Desktop/bussinessSystem.xml");
-    }
+    }        
     
     public static void pruebaP3_05() {
+        
+        System.out.println("\nEJERCICO 5 PRIMER METODO\n");
         File f = new File("bussinessSystem.xml");
         BussinessSystem bs = new BussinessSystem();
         try {
